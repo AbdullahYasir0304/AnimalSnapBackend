@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: animalsnap-backend
+    env: python
+    region: singapore
+    plan: free
+    branch: main
+    buildCommand: ""
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
