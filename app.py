@@ -4,6 +4,7 @@ from PIL import Image
 import tensorflow as tf
 import numpy as np
 import io
+import os  # ✅ Needed to get PORT from Railway
 
 # Load pre-trained MobileNetV2 model
 model = tf.keras.applications.MobileNetV2(weights="imagenet")
@@ -43,5 +44,7 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# ✅ Use dynamic port in production
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
